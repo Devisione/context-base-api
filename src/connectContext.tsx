@@ -1,4 +1,4 @@
-import { Context, FC, useContext, useMemo } from "react";
+import React, { Context, FC, useContext, useMemo } from "react";
 
 // TODO connectContexts
 export const connectContext = function <T, D>(

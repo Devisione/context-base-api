@@ -1,20 +1,31 @@
 {
   "name": "context-base-api",
-  "version": "1.0.2",
+  "version": "1.0.9",
   "repository": "https://github.com/Devisione/context-base-api.git",
   "author": "Devisione <stipafk@gmail.com>",
   "license": "MIT",
-  "files": ["dist/**"],
-  "main": "dist/index.js",
-  "dependencies": {
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "devDependencies": {
     "@types/react": "^18.0.26",
     "prettier": "^2.8.1",
-    "react": "^18.2.0",
+    "react": "^16.13.1",
     "typescript": "^4.9.4"
   },
   "scripts": {
-    "build": "rm -rf dist && tsc --declaration",
+    "build": "rm -rf dist && yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "prepublish": "npm run build",
-    "publish": "npm publish --access public"
+    "publish": "npm publish"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0"
   }
 }
