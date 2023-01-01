@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "skipLibCheck": true,
+    "baseUrl": "./src",
+    "jsx": "react",
+    "esModuleInterop": true
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "context-base-api",
+  "version": "1.0.2",
+  "repository": "https://github.com/Devisione/context-base-api.git",
+  "author": "Devisione <stipafk@gmail.com>",
+  "license": "MIT",
+  "files": ["dist/**"],
+  "main": "dist/index.js",
+  "dependencies": {
+    "@types/react": "^18.0.26",
+    "prettier": "^2.8.1",
+    "react": "^18.2.0",
+    "typescript": "^4.9.4"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc --declaration",
+    "prepublish": "npm run build",
+    "publish": "npm publish --access public"
+  }
+}
