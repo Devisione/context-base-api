@@ -1,22 +1,23 @@
 import React from "react";
-// @ts-ignore
-import { connectContext, withContexts } from "context-base-api";
-import { MessagesStore } from "./Stores/Messages";
+import { withContexts } from "context-base-api";
+import { GlobalContextProvider } from "./Stores/Messages";
 import { GlobalStore } from "./Stores/Global";
+import { StoreExample, StoreExampleUser } from "./Stores";
+import { ContextExample, ContextExampleUser } from "./Context";
 
-const Page = connectContext(
-  MessagesStore.Context,
-  ({
-    state: {
-      messages: { isLoading },
-    },
-  }) => ({ isLoading })
-)(({ isLoading }) => {
-  return <div>{isLoading.toString()}</div>;
-});
+const Page = () => {
+  return (
+    <>
+      <StoreExample />
+      <StoreExampleUser />
+      <ContextExample />
+      <ContextExampleUser />
+    </>
+  );
+};
 
 // @ts-ignore
 export default withContexts(Page, [
-  MessagesStore.Provider,
+  GlobalContextProvider,
   GlobalStore.Provider,
 ]);

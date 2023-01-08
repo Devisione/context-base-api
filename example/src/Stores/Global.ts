@@ -1,9 +1,9 @@
 import { useState } from "react";
-// @ts-ignore
 import { createStore } from "context-base-api";
 
 export const GlobalStore = createStore(() => {
-  const [notifications] = useState([]);
+  const [notifications, updateNotifications] = useState<string[]>([]);
+  const [user] = useState({ name: "Grigoriy" });
 
-  return { state: { notifications } };
+  return { state: { notifications, user }, actions: { updateNotifications } };
 });
