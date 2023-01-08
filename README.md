@@ -29,6 +29,29 @@ export const TodoList = connectContext(
 });
 ```
 
+# Stores
+
+```jsx
+export const MessagesStore = createStore(() => {
+    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState<string[]>();
+
+    const loadingItems = () => {
+        setLoading(true);
+        (() => {
+            setData([]);
+        })();
+        setLoading(false);
+    };
+
+    return {
+        state: { messages: { isLoading: loading, items: data } },
+        actions: { loadingItems },
+    };
+});
+
+```
+
 # Contribution
 In the near future I would like to add several Contexts for use in connectContext.
 If you have time you can help me with this 
