@@ -1,11 +1,13 @@
 import React, { Context, FC, PureComponent } from "react";
 
-export const connectContext = function <T, D>(
-  Context: Context<T>,
-  getValueByKey: (value: T) => D
+export const connectContext = function <ContextValue, ComponentProps>(
+  Context: Context<ContextValue>,
+  getValueByKey: (value: ContextValue) => ComponentProps
 ) {
   // eslint-disable-next-line react/display-name
-  return (Component: FC<D>) => {
+  return function <ComponentExtends>(
+    Component: FC<ComponentProps & ComponentExtends>
+  ) {
     // @ts-ignore
     class WrapperComponent extends PureComponent {
       render() {
