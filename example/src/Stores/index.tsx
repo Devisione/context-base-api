@@ -1,5 +1,5 @@
-import React, { memo, PropsWithChildren } from "react";
-import { connectContext } from "context-base-api";
+import React, { memo } from "react";
+import { connectContext } from "../lib";
 import { GlobalStore } from "./Global";
 
 export const StoreExample = connectContext(
@@ -10,7 +10,7 @@ export const StoreExample = connectContext(
     updateGlobalNotifications: updateNotifications,
   })
 )<{ minDate: string }>(
-  memo(({ globalNotifications, updateGlobalNotifications, minDate }) => {
+  ({ globalNotifications, updateGlobalNotifications, minDate }) => {
     console.log(minDate);
     return (
       <div>
@@ -28,19 +28,16 @@ export const StoreExample = connectContext(
         </button>
       </div>
     );
-  })
+  }
 );
 
 export const StoreExampleUser = connectContext(
   GlobalStore.Context,
-  // @ts-ignore
   ({
     state: {
       user: { name },
     },
   }) => ({ userName: name })
-)<{}>(
-  memo(({ userName }) => {
-    return <div style={{ marginBottom: "24px" }}>{userName}</div>;
-  })
-);
+)(({ userName }) => {
+  return <div style={{ marginBottom: "24px" }}>{userName}</div>;
+});

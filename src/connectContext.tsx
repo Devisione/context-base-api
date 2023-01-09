@@ -1,13 +1,18 @@
-import React, { Context, FC, PureComponent } from "react";
+import React, { Context, FC, memo, PureComponent } from "react";
 
 export const connectContext = function <ContextValue, ComponentProps>(
   Context: Context<ContextValue>,
   getValueByKey: (value: ContextValue) => ComponentProps
 ) {
   // eslint-disable-next-line react/display-name
-  return function <ComponentExtends>(
+  return function <ComponentExtends = {}>(
     Component: FC<ComponentProps & ComponentExtends>
   ) {
+    const MemoComponent = memo((props) => {
+      // @ts-ignore
+      return <Component {...props} />;
+    });
+
     // @ts-ignore
     class WrapperComponent extends PureComponent<ComponentExtends> {
       render() {
@@ -15,7 +20,11 @@ export const connectContext = function <ContextValue, ComponentProps>(
           <Context.Consumer>
             {(
               values // @ts-ignore
-            ) => <Component {...this.props} {...getValueByKey(values)} />}
+            ) => {
+              return (
+                <MemoComponent {...this.props} {...getValueByKey(values)} />
+              );
+            }}
           </Context.Consumer>
         );
       }

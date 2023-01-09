@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createStore } from "context-base-api";
+import { createStore } from "../lib";
 
 export const GlobalStore = createStore(() => {
   const [notifications, updateNotifications] = useState<string[]>([]);

@@ -1,6 +1,6 @@
 {
   "name": "context-base-api",
-  "version": "2.0.6",
+  "version": "2.0.10",
   "repository": "https://github.com/Devisione/context-base-api.git",
   "author": "Devisione <stipafk@gmail.com>",
   "license": "MIT",
@@ -19,7 +19,7 @@
     "typescript": "^4.9.4"
   },
   "scripts": {
-    "build": "rm -rf dist && yarn build:esm && yarn build:cjs",
+    "build": "rm -rf dist && yarn build:esm && yarn build:cjs && cp -R dist/esm/ example/src/lib",
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "prepublish": "npm run build",

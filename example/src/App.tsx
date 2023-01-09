@@ -1,5 +1,5 @@
 import React from "react";
-import { withContexts } from "context-base-api";
+import { withContexts } from "./lib";
 import { GlobalContextProvider } from "./Stores/Messages";
 import { GlobalStore } from "./Stores/Global";
 import { StoreExample, StoreExampleUser } from "./Stores";
