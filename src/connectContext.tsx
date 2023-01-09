@@ -9,13 +9,13 @@ export const connectContext = function <ContextValue, ComponentProps>(
     Component: FC<ComponentProps & ComponentExtends>
   ) {
     // @ts-ignore
-    class WrapperComponent extends PureComponent {
+    class WrapperComponent extends PureComponent<ComponentExtends> {
       render() {
         return (
           <Context.Consumer>
             {(
               values // @ts-ignore
-            ) => <Component {...getValueByKey(values)} />}
+            ) => <Component {...this.props} {...getValueByKey(values)} />}
           </Context.Consumer>
         );
       }

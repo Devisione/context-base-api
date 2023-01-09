@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, PropsWithChildren } from "react";
 import { connectContext } from "context-base-api";
 import { GlobalStore } from "./Global";
 
@@ -9,8 +9,9 @@ export const StoreExample = connectContext(
     globalNotifications: notifications,
     updateGlobalNotifications: updateNotifications,
   })
-)(
-  memo(({ globalNotifications, updateGlobalNotifications }) => {
+)<{ minDate: string }>(
+  memo(({ globalNotifications, updateGlobalNotifications, minDate }) => {
+    console.log(minDate);
     return (
       <div>
         Global
@@ -38,7 +39,7 @@ export const StoreExampleUser = connectContext(
       user: { name },
     },
   }) => ({ userName: name })
-)(
+)<{}>(
   memo(({ userName }) => {
     return <div style={{ marginBottom: "24px" }}>{userName}</div>;
   })

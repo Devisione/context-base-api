@@ -8,7 +8,7 @@ import { ContextExample, ContextExampleUser } from "./Context";
 const Page = () => {
   return (
     <>
-      <StoreExample />
+      <StoreExample minDate={"qwef"} />
       <StoreExampleUser />
       <ContextExample />
       <ContextExampleUser />
