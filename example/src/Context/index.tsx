@@ -6,7 +6,7 @@ export const ContextExample = memo(() => {
 
   return (
     <div>
-      Global
+      Context
       <div>{notifications.length}</div>
       <button
         onClick={() =>

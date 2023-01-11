@@ -3,9 +3,13 @@ import { connectContext } from "../lib";
 import { GlobalStore } from "./Global";
 
 export const StoreExample = connectContext(
-  GlobalStore.Context,
-  // @ts-ignore
-  ({ state: { notifications }, actions: { updateNotifications } }) => ({
+  [GlobalStore.Context],
+  ([
+    {
+      state: { notifications },
+      actions: { updateNotifications },
+    },
+  ]) => ({
     globalNotifications: notifications,
     updateGlobalNotifications: updateNotifications,
   })
@@ -32,12 +36,14 @@ export const StoreExample = connectContext(
 );
 
 export const StoreExampleUser = connectContext(
-  GlobalStore.Context,
-  ({
-    state: {
-      user: { name },
+  [GlobalStore.Context],
+  ([
+    {
+      state: {
+        user: { name },
+      },
     },
-  }) => ({ userName: name })
+  ]) => ({ userName: name })
 )(({ userName }) => {
   return <div style={{ marginBottom: "24px" }}>{userName}</div>;
 });
