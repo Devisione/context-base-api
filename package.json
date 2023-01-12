@@ -1,6 +1,6 @@
 {
   "name": "context-base-api",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "repository": "https://github.com/Devisione/context-base-api.git",
   "author": "Devisione <stipafk@gmail.com>",
   "license": "MIT",
@@ -23,7 +23,7 @@
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "prepublish": "npm run build",
-    "publish": "npm publish"
+    "push_npm": "npm publish"
   },
   "peerDependencies": {
     "react": "^16.0.0"
@@ -33,5 +33,8 @@
     "context",
     "react-context",
     "context-base-api"
-  ]
+  ],
+  "dependencies": {
+    "tslib": "^2.4.1"
+  }
 }

@@ -7,3 +7,12 @@ export const GlobalStore = createStore(() => {
 
   return { state: { notifications, user }, actions: { updateNotifications } };
 });
+
+export const CustomStore = createStore(
+  ({ notifications }) => {
+    console.log(notifications);
+    return { actions: {}, state: {} };
+  },
+  [GlobalStore.Context],
+  () => ({ notifications: [] })
+);

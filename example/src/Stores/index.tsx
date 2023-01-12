@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import { connectContext } from "../lib";
 import { GlobalStore } from "./Global";
 
@@ -15,7 +15,6 @@ export const StoreExample = connectContext(
   })
 )<{ minDate: string }>(
   ({ globalNotifications, updateGlobalNotifications, minDate }) => {
-    console.log(minDate);
     return (
       <div>
         Global

@@ -1,15 +1,12 @@
 import React, { Context, FC, memo, PureComponent } from "react";
-
-type ContextValues<TContexts extends Context<any>[]> = {
-  [K in keyof TContexts]: TContexts[K] extends Context<infer T> ? T : never;
-};
+import { ContextValues } from "./types";
 
 export const connectContext = function <
-  ContextList extends Context<any>[],
+  ContextItems extends Context<any>[],
   ComponentProps
 >(
-  initialContexts: ContextList,
-  getValueByKey: (value: ContextValues<ContextList>) => ComponentProps
+  initialContexts: [...ContextItems],
+  getValueByKey?: (values: ContextValues<ContextItems>) => ComponentProps
 ) {
   return function <ComponentExtends = {}>(
     Component: FC<ComponentProps & ComponentExtends>
@@ -22,16 +19,18 @@ export const connectContext = function <
     // @ts-ignore
     class RecursiveComponent extends PureComponent<{
       Contexts: Context<any>[];
-      contextValues?: ContextValues<ContextList>;
+      contextValues?: ContextValues<ContextItems>;
     }> {
       render() {
         const {
           Contexts,
-          contextValues = [] as ContextValues<ContextList>,
+          contextValues = [] as ContextValues<ContextItems>,
           ...componentProps
         } = this.props;
         const CurrentContext = Contexts[0];
         const NextContexts = Contexts.filter((_, index) => index !== 0);
+
+        if (!CurrentContext) return <MemoComponent {...componentProps} />;
 
         return (
           <CurrentContext.Consumer>
@@ -46,8 +45,10 @@ export const connectContext = function <
               ) : (
                 // @ts-ignore
                 <MemoComponent
-                  // @ts-ignore
-                  {...getValueByKey(contextValues.concat([state]))}
+                  {...(getValueByKey
+                    ? // @ts-ignore
+                      getValueByKey(contextValues.concat([state]))
+                    : {})}
                   {...componentProps}
                 />
               )
