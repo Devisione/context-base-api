@@ -11,7 +11,7 @@ export const connectContext = function <
   return function <ComponentExtends = {}>(
     Component: FC<ComponentProps & ComponentExtends>
   ): React.FC<ComponentExtends> {
-    const MemoComponent = memo((props) => {
+    const MemoComponent = memo((props: ComponentExtends) => {
       // @ts-ignore
       return <Component {...props} />;
     });
@@ -30,7 +30,10 @@ export const connectContext = function <
         const CurrentContext = Contexts[0];
         const NextContexts = Contexts.filter((_, index) => index !== 0);
 
-        if (!CurrentContext) return <MemoComponent {...componentProps} />;
+        if (!CurrentContext) {
+          // @ts-ignore
+          return <MemoComponent {...componentProps} />;
+        }
 
         return (
           <CurrentContext.Consumer>
@@ -58,7 +61,7 @@ export const connectContext = function <
       }
     }
 
-    return (props) => (
+    return (props: ComponentExtends) => (
       <RecursiveComponent Contexts={initialContexts} {...props} />
     );
   };

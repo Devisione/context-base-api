@@ -16,8 +16,10 @@ export var connectContext = function (initialContexts, getValueByKey) {
                 var _a = this.props, Contexts = _a.Contexts, _b = _a.contextValues, contextValues = _b === void 0 ? [] : _b, componentProps = __rest(_a, ["Contexts", "contextValues"]);
                 var CurrentContext = Contexts[0];
                 var NextContexts = Contexts.filter(function (_, index) { return index !== 0; });
-                if (!CurrentContext)
+                if (!CurrentContext) {
+                    // @ts-ignore
                     return React.createElement(MemoComponent, __assign({}, componentProps));
+                }
                 return (React.createElement(CurrentContext.Consumer, null, function (state) {
                     return NextContexts.length ? (React.createElement(RecursiveComponent, __assign({ Contexts: NextContexts, 
                         // @ts-ignore
@@ -31,7 +33,6 @@ export var connectContext = function (initialContexts, getValueByKey) {
             };
             return RecursiveComponent;
         }(PureComponent));
-        // TODO: dont know why work without type
         return function (props) { return (React.createElement(RecursiveComponent, __assign({ Contexts: initialContexts }, props))); };
     };
 };
