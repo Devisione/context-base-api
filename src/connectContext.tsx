@@ -10,7 +10,7 @@ export const connectContext = function <
 ) {
   return function <ComponentExtends = {}>(
     Component: FC<ComponentProps & ComponentExtends>
-  ) {
+  ): React.FC<ComponentExtends> {
     const MemoComponent = memo((props) => {
       // @ts-ignore
       return <Component {...props} />;
@@ -58,7 +58,7 @@ export const connectContext = function <
       }
     }
 
-    return (props: ComponentProps & ComponentExtends) => (
+    return (props) => (
       <RecursiveComponent Contexts={initialContexts} {...props} />
     );
   };
