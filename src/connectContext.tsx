@@ -58,8 +58,7 @@ export const connectContext = function <
       }
     }
 
-    // TODO: dont know why work without type
-    return (props: any) => (
+    return (props: ComponentProps & ComponentExtends) => (
       <RecursiveComponent Contexts={initialContexts} {...props} />
     );
   };
