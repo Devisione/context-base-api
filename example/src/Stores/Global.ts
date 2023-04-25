@@ -9,10 +9,14 @@ export const GlobalStore = createStore(() => {
 });
 
 export const CustomStore = createStore(
-  ({ notifications }) => {
+  ({ notifications }: { notifications: string[] }) => {
     console.log(notifications);
     return { actions: {}, state: {} };
   },
   [GlobalStore.Context],
-  () => ({ notifications: [] })
+  ([
+    {
+      state: { notifications },
+    },
+  ]) => ({ notifications })
 );

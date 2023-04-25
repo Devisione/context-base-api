@@ -8,10 +8,10 @@ export interface Store<State, Actions> {
 }
 
 export const createStore = function <
+  ComponentProps extends Record<string, any>,
   State,
   Actions,
-  ContextItems extends Context<any>[],
-  ComponentProps
+  ContextItems extends Context<any>[] = []
 >(
   useCustomHook: (params: ComponentProps) => Store<State, Actions>,
   Contexts?: [...ContextItems],
